@@ -5,12 +5,15 @@ import io.qameta.allure.Story;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.Test;
 import service.AuthorizationService;
+import service.HomePageService;
+
 import static org.junit.Assert.assertTrue;
 
 @Feature("Тестирование авторизации")
 public class AuthorizationTest extends Hooks {
 
     private AuthorizationService authorizationService = new AuthorizationService();
+    private HomePageService homePageService = new HomePageService();
     private Configuration configuration = new Configuration();
 
     @Test
@@ -21,6 +24,7 @@ public class AuthorizationTest extends Hooks {
         authorizationService.performAuthorization(configuration.getConfigurationFile("loginMy"), configuration.getConfigurationFile("passwordMy"));
         authorizationService.isSignInButtonVisible(softAssertions);
         authorizationService.pressSignInButton();
+        assertTrue("Ошибка авторизации пользователя с валидными данными", homePageService.isHomePageOpen());
     }
 
     @Test
@@ -31,6 +35,6 @@ public class AuthorizationTest extends Hooks {
         authorizationService.performAuthorization(configuration.getConfigurationFile("loginInvalid"), configuration.getConfigurationFile("passwordInvalid"));
         authorizationService.isSignInButtonVisible(softAssertions);
         authorizationService.pressSignInButton();
-        assertTrue(authorizationService.isErrorVisible());
+        assertTrue("Не отображается ошибка о некорректном вводе логина и пароля", authorizationService.isErrorVisible());
     }
 }

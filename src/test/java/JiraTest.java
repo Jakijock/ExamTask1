@@ -56,19 +56,17 @@ public class JiraTest extends Hooks {
         assertTrue("Ожидалась версия \"Version 2.0\"", versionTest.equals("Version 2.0"));
     }
 
-    // ===============================      П Р О В Е Р И Т Ь       ===========================================
     @Test
     @Story("Создание новой задачи")
     public void createNewTask() {
         homePageService.isAllRequiredFieldsAreVisible(softAssertion);
         homePageService.openCreateTestPage();
         createTestService.isAllRequiredFieldsAreVisible(softAssertion);
-        createTestService.performCreateTest("TestSirozh64455", "Description");
+        createTestService.performCreateTest("TaskSirozh2", "Description");
         createTestService.isAllRequiredFieldsAreVisible(softAssertion);
         createTestService.pressCreateButton();
     }
 
-    // ===============================      П Р О В Е Р И Т Ь       ============================================
     @Test
     @Story("Изменение статуса задачи")
     public void changeStatusTaskToClosed() throws InterruptedException {
@@ -77,11 +75,10 @@ public class JiraTest extends Hooks {
         browseProjectsService.selectProject("Test");
         rapidBoardService.openListOfTasks(softAssertion);
         rapidBoardService.showAllTasks();
-        rapidBoardService.selectTest("TestSirozh5");
+        rapidBoardService.selectTest("TaskSirozh2");
         rapidBoardService.openTestInformationPage(softAssertion);
         testInformationService.isAllRequiredFieldsAreVisible(softAssertion);
         testInformationService.completeTask();
-        Thread.sleep(3000);
         String statusTest = rapidBoardService.getStatusValue(softAssertion);
         assertTrue("Ожидался статус задачи \"ГОТОВО\"", statusTest.equals("ГОТОВО"));
     }
