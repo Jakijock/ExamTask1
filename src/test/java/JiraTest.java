@@ -62,7 +62,7 @@ public class JiraTest extends Hooks {
         homePageService.isAllRequiredFieldsAreVisible(softAssertion);
         homePageService.openCreateTestPage();
         createTestService.isAllRequiredFieldsAreVisible(softAssertion);
-        createTestService.performCreateTest("TaskSirozh2", "Description");
+        createTestService.performCreateTest("TaskSirozh4", "Description");
         createTestService.isAllRequiredFieldsAreVisible(softAssertion);
         createTestService.pressCreateButton();
     }
@@ -75,7 +75,7 @@ public class JiraTest extends Hooks {
         browseProjectsService.selectProject("Test");
         rapidBoardService.openListOfTasks(softAssertion);
         rapidBoardService.showAllTasks();
-        rapidBoardService.selectTest("TaskSirozh2");
+        rapidBoardService.selectTest("TaskSirozh4");
         rapidBoardService.openTestInformationPage(softAssertion);
         testInformationService.isAllRequiredFieldsAreVisible(softAssertion);
         testInformationService.completeTask();
